@@ -3,8 +3,6 @@
 
 run project locally localhost:8080/apis
 
-postgressql - database
-
 
 # quarkus
 
