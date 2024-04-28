@@ -1,9 +1,10 @@
 package api;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -15,94 +16,80 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import model.Player;
-import model.Stats;
 
 @Path("/players/")
 public class playerResources {
 
-    public static List<Player> players = new ArrayList<>();
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPlayers() {
+    public Response getAllPlayers() {
+        List<Player> players = Player.listAll();
         return Response.ok(players).build();
     }
 
 
     @GET
-    @Path("count")
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Integer getPlayersCount() {
-        return players.size();
+    public Response getPlayerById(@PathParam("id") String id) {
+        return Player.findByIdOptional(id)
+        .map(player -> Response.ok(player).build())
+        .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
 
     @POST
+    @Transactional
     @Path("add")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createPlayer(Player player) {
-        players.add(player);
-        return Response.ok(player).build();
+    public Response createPlayer(@RequestBody Player player) {
+        Player.persist(player);
+        if(player.isPersistent()){
+            return Response.status(Response.Status.CREATED).build();
+
+        }
+
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
-    
+
 
     @PUT
-    @Path("{uuid}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updatePlayer(@PathParam("uuid") String uuid, Player player) {
-
-        Player existingPlayer = players.stream()
-                .filter(p -> p.getUUID().equals(uuid))
-                .findFirst()
-                .orElse(null);
-
-        if (existingPlayer != null) {
-            // Update the player attributes
-            existingPlayer.setName(player.getName());
-            existingPlayer.setHeight(player.getHeight());
-            existingPlayer.setWeight(player.getWeight());
-            existingPlayer.setBirthDate(player.getBirthDate());
-            existingPlayer.setLeague(player.getLeague());
-            existingPlayer.setMainFoot(player.getMainFoot());
-            existingPlayer.setWeakFoot(player.getWeakFoot());
-            existingPlayer.setSkillMoves(player.getSkillMoves());
-            existingPlayer.setValue(player.getValue());
-
-            // Update player stats
-            Stats playerStats = player.getStats();
-            if (playerStats != null) {
-                existingPlayer.getStats().setPace(playerStats.getPace());
-                existingPlayer.getStats().setShooting(playerStats.getShooting());
-                existingPlayer.getStats().setPassing(playerStats.getPassing());
-                existingPlayer.getStats().setDribbling(playerStats.getDribbling());
-                existingPlayer.getStats().setDefending(playerStats.getDefending());
-                existingPlayer.getStats().setPhysical(playerStats.getPhysical());
-            }
-
-            return Response.ok(existingPlayer).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).entity("Player not found to update").build();
-        }
+    public Response updatePlayer(@PathParam("id") String id, @RequestBody Player updatedPlayer) {
+    Player existingPlayer = Player.findById(id);
+    if (existingPlayer == null) {
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 
+    existingPlayer.name = updatedPlayer.name;
+    existingPlayer.height = updatedPlayer.height;
+    existingPlayer.weight = updatedPlayer.weight;
+    existingPlayer.birthDate = updatedPlayer.birthDate;
+    existingPlayer.league = updatedPlayer.league;
+    existingPlayer.mainFoot = updatedPlayer.mainFoot;
+    existingPlayer.weakFoot = updatedPlayer.weakFoot;
+    existingPlayer.skillMoves = updatedPlayer.skillMoves;
+    existingPlayer.value = updatedPlayer.value;
 
-     @DELETE
-    @Path("{uuid}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response deletePlayer(@PathParam("uuid") String uuid) {
-        Player playerToDelete = players.stream()
-                .filter(p -> p.getUUID().equals(uuid))
-                .findFirst()
-                .orElse(null);
+    existingPlayer.persist();
 
-        if (playerToDelete != null) {
-            players.remove(playerToDelete);
-            return Response.ok().build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).entity("Player not found to delete").build();
+    return Response.ok(existingPlayer).build();
+}
+
+
+    @DELETE
+    @Transactional
+    @Path("{id}")
+    public Response deletePlayer(@PathParam("id") String id) {
+        boolean deleted = Player.deleteById(id);
+
+        if(deleted) {
+            return Response.noContent().build();
         }
+    
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
-
 
 }

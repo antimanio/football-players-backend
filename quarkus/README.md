@@ -1,3 +1,9 @@
+
+# To see all api endpoints
+
+run project locally localhost:8080/apis
+
+
 # quarkus
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.

@@ -8,13 +8,5 @@
     "mainFoot": 1,
     "weakFoot": 5,
     "skillMoves": 5,
-    "value": 100000000,
-    "stats": {
-      "pace": 85,
-      "shooting": 92,
-      "passing": 91,
-      "dribbling": 95,
-      "defending": 38,
-      "physical": 65
-    }
+    "value": 100000000
   }

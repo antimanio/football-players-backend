@@ -32,21 +32,6 @@
       },
       "value": {
         "type": "integer"
-      },
-      "stats": {
-        "type": "object",
-        "properties": {
-          "pace": {
-            "type": "integer"
-          },
-          "strengh": {
-            "type": "integer"
-          }
-        },
-        "required": [
-          "pace",
-          "strengh"
-        ]
       }
     },
     "required": [
@@ -59,7 +44,6 @@
       "mainFoot",
       "weakFoot",
       "skillMoves",
-      "value",
-      "stats"
+      "value"
     ]
   }
