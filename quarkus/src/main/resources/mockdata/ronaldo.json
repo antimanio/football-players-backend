@@ -1,0 +1,11 @@
+{
+    "name": "Cristiano Ronaldo",
+    "height": 187,
+    "weight": 83,
+    "birthDate": "1985-02-05",
+    "league": "Serie A",
+    "mainFoot": 1,
+    "weakFoot": 4,
+    "skillMoves": 5,
+    "value": 85000000
+  }

@@ -1,12 +1,11 @@
-{
-    "id": "eac1ec5d-449c-4b20-89c0-813ff75f4e10",
-    "name": "Lionel Messi",
-    "height": 170,
-    "weight": 72,
-    "birthDate": "1987-06-24",
-    "league": "La Liga",
-    "mainFoot": 1,
-    "weakFoot": 5,
-    "skillMoves": 5,
-    "value": 100000000
+  {
+      "name": "Lionel Messi",
+      "height": 170,
+      "weight": 72,
+      "birthDate": "1987-06-24",
+      "league": "La Liga",
+      "mainFoot": 1,
+      "weakFoot": 5,
+      "skillMoves": 5,
+      "value": 100000000
   }

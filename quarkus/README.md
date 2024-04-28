@@ -1,11 +1,12 @@
 
-# To see all api endpoints
+# To see all api endpoints (SwaggerUI)
 
-run project locally localhost:8080/apis
+run project,  localhost:8080/apis
 
+# Docker: 
+docker run --name postgres -e POSTGREST_USER=postgress -e POSTGRES_PASSWORD=postgres -e POSTGRE_DB=players -p 5432:5432 postgres:15.0
 
-# quarkus
-
+# Quarkus
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .

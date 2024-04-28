@@ -1,0 +1,11 @@
+{
+    "name": "Neymar Jr.",
+    "height": 175,
+    "weight": 68,
+    "birthDate": "1992-02-05",
+    "league": "Ligue 1",
+    "mainFoot": 2,
+    "weakFoot": 5,
+    "skillMoves": 5,
+    "value": 120000000
+  }
