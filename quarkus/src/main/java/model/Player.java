@@ -10,7 +10,7 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 @RegisterForReflection
 public class Player extends Stats {
 
-    public String id;
+    public String uuid;
     public String name;
     public Integer height;
     public Integer weight;
@@ -23,7 +23,8 @@ public class Player extends Stats {
     public Stats stats;
 
 
-    public Player(String name, Integer height, Integer weight, LocalDate birthDate, String league, Integer mainFoot, Integer weakFoot, Integer skillMoves, Integer value, Stats stats){
+    public Player(String uuid, String name, Integer height, Integer weight, LocalDate birthDate, String league, Integer mainFoot, Integer weakFoot, Integer skillMoves, Integer value, Stats stats){
+        this.uuid = uuid;
         this.name = name;
         this.height = height;
         this.weight = weight;
@@ -36,6 +37,9 @@ public class Player extends Stats {
         this.stats = stats;
     }
 
+    public String getUUID() {
+        return uuid;
+    }
 
     public String getName() {
         return name;
@@ -106,6 +110,10 @@ public class Player extends Stats {
 
     public void setValue(Integer value) {
         this.value = value;
+    }
+
+    public Stats getStats() {
+        return stats;
     }
     
 }
