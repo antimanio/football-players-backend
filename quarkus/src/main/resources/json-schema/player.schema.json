@@ -1,0 +1,65 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "uuid": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "height": {
+        "type": "integer"
+      },
+      "weight": {
+        "type": "integer"
+      },
+      "birthDate": {
+        "type": "string",
+        "format": "date"
+      },
+      "league": {
+        "type": "string"
+      },
+      "mainFoot": {
+        "type": "integer"
+      },
+      "weakFoot": {
+        "type": "integer"
+      },
+      "skillMoves": {
+        "type": "integer"
+      },
+      "value": {
+        "type": "integer"
+      },
+      "stats": {
+        "type": "object",
+        "properties": {
+          "pace": {
+            "type": "integer"
+          },
+          "strengh": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "pace",
+          "strengh"
+        ]
+      }
+    },
+    "required": [
+      "uuid",
+      "name",
+      "height",
+      "weight",
+      "birthDate",
+      "league",
+      "mainFoot",
+      "weakFoot",
+      "skillMoves",
+      "value",
+      "stats"
+    ]
+  }
