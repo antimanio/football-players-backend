@@ -25,7 +25,7 @@ public class Player extends PanacheEntity {
     public String league;
 
     @Column
-    public Integer mainFoot;
+    public String foot;
 
     @Column
     public Integer weakFoot;
@@ -34,6 +34,6 @@ public class Player extends PanacheEntity {
     public Integer skillMoves;
 
     @Column
-    public Integer value;
+    public Integer marketPrice;
     
 }

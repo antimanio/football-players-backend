@@ -1,7 +1,11 @@
 
-# To see all api endpoints (SwaggerUI)
+# About this project
 
-run project,  localhost:8080/apis
+Java 21 required
+
+SwaggerUI:
+- localhost:8080/apis
+- https://drop-api.ea.com/api#/ -> coming soon
 
 # Docker: 
 docker run --name postgres -e POSTGREST_USER=postgress -e POSTGRES_PASSWORD=postgres -e POSTGRE_DB=players -p 5432:5432 postgres:15.0

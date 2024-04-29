@@ -4,8 +4,8 @@
       "weight": 72,
       "birthDate": "1987-06-24",
       "league": "La Liga",
-      "mainFoot": 1,
+      "foot": "Left",
       "weakFoot": 5,
       "skillMoves": 5,
-      "value": 100000000
+      "marketPrice": 100000000
   }

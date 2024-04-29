@@ -4,8 +4,8 @@
     "weight": 83,
     "birthDate": "1985-02-05",
     "league": "Serie A",
-    "mainFoot": 1,
+    "foot": "Right",
     "weakFoot": 4,
     "skillMoves": 5,
-    "value": 85000000
+    "marketPrice": 85000000
   }

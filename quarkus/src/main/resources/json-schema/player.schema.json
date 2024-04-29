@@ -21,8 +21,8 @@
       "league": {
         "type": "string"
       },
-      "mainFoot": {
-        "type": "integer"
+      "foot": {
+        "type": "string"
       },
       "weakFoot": {
         "type": "integer"
@@ -30,7 +30,7 @@
       "skillMoves": {
         "type": "integer"
       },
-      "value": {
+      "marketPrice": {
         "type": "integer"
       }
     },

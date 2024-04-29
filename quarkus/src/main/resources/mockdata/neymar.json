@@ -4,8 +4,8 @@
     "weight": 68,
     "birthDate": "1992-02-05",
     "league": "Ligue 1",
-    "mainFoot": 2,
+    "foot": "Right",
     "weakFoot": 5,
     "skillMoves": 5,
-    "value": 120000000
+    "marketPrice": 120000000
   }
