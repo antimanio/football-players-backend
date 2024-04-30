@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
-      "uuid": {
+      "id": {
         "type": "string"
       },
       "name": {
@@ -35,7 +35,7 @@
       }
     },
     "required": [
-      "uuid",
+      "id",
       "name",
       "height",
       "weight",
