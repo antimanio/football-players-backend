@@ -14,14 +14,14 @@ kubectl create role configmap-rolle --verb=get --verb=list --resource=configmaps
 kubectl create rolebinding my-rolebinding-configmap --role=configmap-rolle --serviceaccount=default:default
 
 ### Useful CLI
-kubectl get configmaps
-kubectl get secerts
-kubectel get roles
-kubectl get rolesbindings
-kubectl get deployments
-kubectl describe configmap "name-of-configmap"
-kubectl get pods
-kubectl get all
+- kubectl get configmaps
+- kubectl get secerts
+- kubectl get roles
+- kubectl get rolesbindings
+- kubectl get deployments
+- kubectl describe configmap "name-of-configmap"
+- kubectl get pods
+- kubectl get all
 
 
 ### Resource: 
