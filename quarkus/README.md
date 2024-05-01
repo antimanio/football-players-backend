@@ -1,14 +1,14 @@
 
-# About this project
+# Requirements
+- Java 21
+- Quarkus 
+- Docker 
 
-Java 21 required
-
-SwaggerUI:
+#SwaggerUI:
 - localhost:8080/apis
-- https://drop-api.ea.com/api#/ -> coming soon
 
 # Docker: 
-docker run --name postgres -e POSTGREST_USER=postgress -e POSTGRES_PASSWORD=postgres -e POSTGRE_DB=players -p 5432:5432 postgres:15.0
+Docker compose up -> to run docker-compose-yml file.
 
 # Quarkus
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
