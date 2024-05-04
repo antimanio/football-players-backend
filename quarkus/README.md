@@ -27,10 +27,18 @@ To build a image and push to DockerHub / Registry:
 
 ## Minikube
 - `minikube start --driver=docker` -> Start your cluster.
+- `minikube status` -> Check status. 
 - `minikube dashboard` -> Get some insights. 
 - `minikube stop` -> Halt the cluster
 
+![alt text](src/main/img/minikubestart.png)
+![alt text](src/main/img/minikubestatus.png)
+
 ## K8S
+Useful tools
+- `kubectx <context-name>` to switch context
+- `kubens <namespace-name>` to switch namespaces
+
 To create or update resources in the cluster (MiniKube): 
 - `kubectl apply -f postgres-configmap.yaml`
 - `kubectl apply -f postgres-credentials.yaml`
@@ -47,15 +55,21 @@ kubectl create role configmap-rolle --verb=get --verb=list --resource=configmaps
 kubectl create rolebinding my-rolebinding-configmap --role=configmap-rolle --serviceaccount=default:default
 
 ### Useful CLI
-- kubectl get configmaps
-- kubectl describe configmap "name-of-configmap"
-- kubectl get secrets
-- kubectl get roles
-- kubectl get rolesbindings
-- kubectl get deployments
-- kubectl get pods
-- kubectl get all
+- `kubectl get configmaps`
+- `kubectl describe configmap <name-of-configmap>`
+![alt text](src/main/img/configmap.png)
+
+- `kubectl get secrets`
+![alt text](src/main/img/secrets.png)
+
+- `kubectl get roles`
+- `kubectl get rolesbindings`
+![alt text](src/main/img/rolesandrolebindings.png)
+
+- `kubectl get all`
+![alt text](src/main/img/getall.png)
 
 ### Resource: 
 - https://kubernetes.io/
 - https://minikube.sigs.k8s.io/docs/start/
+- https://github.com/ahmetb/kubectx
