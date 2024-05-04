@@ -1,14 +1,15 @@
 
-# Info 
-Language: Java 21
-BuildTool: Maven
-Framework: Quarkus
-Type: RestAPI
-Database: Postgres
-Docker for containerization
-Kubernetes for container orchestration
-Used WSL2 for development
+# Project Info 
+- Language: Java 21
+- BuildTool: Maven
+- Framework: Quarkus
+- Type: RestAPI
+- Database: Postgres
+- Docker for containerization
+- Kubernetes for container orchestration
+- Used WSL2 for development
 
+# Cluster Info
 - Using Minikube to run a local cluster.
 - Using images from Docker Hub.
 - Created 2 services (postgres & quarkus-api), 1 Configmap and 1 Secret. 
@@ -32,6 +33,7 @@ To build a image and push to DockerHub / Registry:
 - `minikube stop` -> Halt the cluster
 
 ![alt text](src/main/img/minikubestart.png)
+
 ![alt text](src/main/img/minikubestatus.png)
 
 ## K8S
@@ -57,16 +59,20 @@ kubectl create rolebinding my-rolebinding-configmap --role=configmap-rolle --ser
 ### Useful CLI
 - `kubectl get configmaps`
 - `kubectl describe configmap <name-of-configmap>`
+  
 ![alt text](src/main/img/configmap.png)
 
 - `kubectl get secrets`
+  
 ![alt text](src/main/img/secrets.png)
 
 - `kubectl get roles`
 - `kubectl get rolesbindings`
+
 ![alt text](src/main/img/rolesandrolebindings.png)
 
 - `kubectl get all`
+
 ![alt text](src/main/img/getall.png)
 
 ### Resource: 
