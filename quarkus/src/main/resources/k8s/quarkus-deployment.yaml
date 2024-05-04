@@ -23,7 +23,7 @@ spec:
   selector:
     matchLabels:
       app: quarkus-postgres-k8s
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -31,17 +31,17 @@ spec:
     spec:
       containers:
       - name: quarkus-postgres-k8s
-        image: antiman0101/football-players:1.5 # Docker Hub/Registry
+        image: antiman0101/football-players:2.3 # Docker Hub/Registry
         imagePullPolicy: "IfNotPresent"
         ports:
         - containerPort: 8080
         env:
-        - name: DB_HOST
+        - name: POSTGRES_HOST
           valueFrom:
             configMapKeyRef:
               name: postgres-configmap
               key: host
-        - name: DB_NAME
+        - name: POSTGRES_DB
           valueFrom:
             configMapKeyRef:
               name: postgres-configmap
@@ -49,10 +49,10 @@ spec:
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
+              name: postgres-credentials
               key: postgres_user
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
+              name: postgres-credentials
               key: postgres_password

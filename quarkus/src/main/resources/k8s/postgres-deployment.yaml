@@ -5,29 +5,11 @@ metadata:
   name: postgres
   labels:
     app: postgres
-    tier: database
 spec:
   ports:
   - port: 5432
   selector:
     app: postgres
-    tier: database
-  clusterIP: None
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim #user
-metadata:
-  name: postgres-pv-claim
-  labels:
-    app: postgres
-    tier: database
-spec:
-  accessModes:
-  - ReadWriteOnce #This specifies the mode of the claim that we are trying to create.
-  resources:
-    requests:
-      storage: 1Gi #This will tell kubernetes about the amount of space we are trying to claim.
 
 ---
 apiVersion: apps/v1
@@ -36,9 +18,8 @@ metadata:
   name: postgres
   labels:
     app: postgres
-    tier: database
-
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: postgres
@@ -46,9 +27,8 @@ spec:
     type: Recreate
   template:
     metadata:
-      labels: # Must match 'Service' and 'Deployment' selectors
+      labels:
         app: postgres
-        tier: database
     spec:
       containers:
       - name: postgres
@@ -58,26 +38,30 @@ spec:
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
+              name: postgres-credentials
               key: postgres_user
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
+              name: postgres-credentials
               key: postgres_password
         - name: POSTGRES_DB
           valueFrom:
             configMapKeyRef:
               name: postgres-configmap
               key: name
-
+        - name: POSTGRES_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-configmap
+              key: host
         ports:
         - containerPort: 5432
           name: postgres
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
-          name: postgres-persistance-storage
+          name: postgresdata
       volumes:
-      - name: postgres-persistance-storage
+      - name: postgresdata
         persistentVolumeClaim:
-          claimName: postgres-pv-claim
+          claimName: postgres-volume-claim
