@@ -1,8 +1,10 @@
 
 # Requirements
-- Java 21
-- Quarkus 
-- Docker 
+Language: Java 21
+BuildTool: Maven
+Framework: Quarkus
+Type: RestAPI
+Docker Desktop
 
 #SwaggerUI:
 - localhost:8080/apis
