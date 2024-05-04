@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
       - name: quarkus-postgres-k8s
-        image: antiman0101/football-players:2.3 # Docker Hub/Registry
+        image: antiman0101/football-players:2.4 # Docker Hub/Registry
         imagePullPolicy: "IfNotPresent"
         ports:
         - containerPort: 8080

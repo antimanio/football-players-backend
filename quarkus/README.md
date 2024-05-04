@@ -1,69 +1,56 @@
 
-# Requirements
+# Info 
 Language: Java 21
 BuildTool: Maven
 Framework: Quarkus
 Type: RestAPI
-Docker Desktop
+Database: Postgres
+Docker for containerization
+Kubernetes for container orchestration
+
+- Using Minikube to run a local cluster.
+- Using images from Docker Hub
+- Created 2 services (postgres & quarkus-api), 1 Configmap and 1 Secret. 
 
 #SwaggerUI:
 - localhost:8080/apis
 
 # Docker: 
-Docker compose up -> to run docker-compose-yml file.
+To build two services for postgres you can run: `docker-compose.yml`
+To build a image and push to DockerHub / Registry: 
+`mvn clean install`
+`docker build -f src/main/docker/Dockerfile.jvm -t football-players .`
+`docker tag football-players username/football-players:1.0`
+`docker push username/football-players:1.0`
 
-# Quarkus
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+# K8S
+To create or update resources in the cluster (MiniKube): 
+`kubectl apply -f postgres-configmap.yaml`
+`kubectl apply -f postgres-credentials.yaml`
+`kubectl apply -f postgres-pv.yaml`
+`kubectl apply -f postgres-pvc.yaml`
+`kubectl apply -f postgres-deployment.yaml`
+`kubectl apply -f quarkus-deployment.yaml`
 
-## Running the application in dev mode
+Remember to give Service account in K8S rights to read configmaps & secrets:
+### Create a role: 
+kubectl create role configmap-rolle --verb=get --verb=list --resource=configmaps --namespace=default
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
-```
+### Create a rolebinding
+kubectl create rolebinding my-rolebinding-configmap --role=configmap-rolle --serviceaccount=default:default
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+### Useful CLI
+- kubectl get configmaps
+- kubectl describe configmap "name-of-configmap"
+- kubectl get secrets
+- kubectl get roles
+- kubectl get rolesbindings
+- kubectl get deployments
+- kubectl get pods
+- kubectl get all
 
-## Packaging and running the application
 
-The application can be packaged using:
-```shell script
-./mvnw package
-```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
-```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using: 
-```shell script
-./mvnw package -Dnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
-
-## Provided Code
-
-### RESTEasy Reactive
-
-Easily start your Reactive RESTful Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+### Resource: 
+https://kubernetes.io/
+https://minikube.sigs.k8s.io/docs/start/
