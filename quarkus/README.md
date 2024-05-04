@@ -15,7 +15,7 @@
 - Created 2 services (postgres & quarkus-api), 1 Configmap and 1 Secret. 
 
 
-#SwaggerUI:
+# SwaggerUI:
 - localhost:8080/apis
 
 ## Docker: 
