@@ -75,6 +75,13 @@ kubectl create rolebinding my-rolebinding-configmap --role=configmap-rolle --ser
 
 ![alt text](src/main/img/getall.png)
 
+
+# To Access the service
+- `kubectl port-forward service/quarkus-postgres-k8s 9000:8080`
+
+# Postman collection
+
+
 ### Resource: 
 - https://kubernetes.io/
 - https://minikube.sigs.k8s.io/docs/start/
