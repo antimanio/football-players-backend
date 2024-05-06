@@ -56,20 +56,30 @@ kubectl create role configmap-rolle --verb=get --verb=list --resource=configmaps
 ### Create a rolebinding
 kubectl create rolebinding my-rolebinding-configmap --role=configmap-rolle --serviceaccount=default:default
 
-### Useful CLI
+- `kubectl get roles`
+- `kubectl get rolebindings`
+
+![alt text](src/main/img/rolesandrolebindings.png)
+
+
+### Configmap
 - `kubectl get configmaps`
 - `kubectl describe configmap <name-of-configmap>`
   
 ![alt text](src/main/img/configmap.png)
 
+### Secrets
 - `kubectl get secrets`
   
 ![alt text](src/main/img/secrets.png)
 
-- `kubectl get roles`
-- `kubectl get rolesbindings`
 
-![alt text](src/main/img/rolesandrolebindings.png)
+### CronJob
+- `kubectl get jobs`
+
+![alt text](src/main/img/cronjob.png)
+
+### Overview
 
 - `kubectl get all`
 
@@ -78,9 +88,6 @@ kubectl create rolebinding my-rolebinding-configmap --role=configmap-rolle --ser
 
 # To Access the service
 - `kubectl port-forward service/quarkus-postgres-k8s 9000:8080`
-
-# Postman collection
-
 
 ### Resource: 
 - https://kubernetes.io/
