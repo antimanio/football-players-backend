@@ -39,7 +39,7 @@ metadata:
   annotations:
     app: restart-app
 spec:
-  schedule: "* * * * *" #every midnight
+  schedule: "0 0 * * *" #every midnight
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 3
