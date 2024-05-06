@@ -1,0 +1,60 @@
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: restart-sa
+  namespace: default
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: restart-rolle
+  namespace: default
+rules:
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "patch", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: restart-binding
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: restart-rolle
+subjects:
+- kind: ServiceAccount
+  name: restart-sa
+  namespace: default
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: restart-app
+  namespace: default
+  annotations:
+    app: restart-app
+spec:
+  schedule: "0 0 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: restart-sa
+          restartPolicy: OnFailure
+          containers:
+          - name: restart-app
+            image: bitnami/kubectl:latest
+            command: ["/bin/bash"]
+            args:
+            - "-c"
+            - |
+              echo "$(date) - Rolling out deployment quarkus-postgres-k8s"
+              kubectl rollout restart deployment/quarkus-postgres-k8s --namespace=default
